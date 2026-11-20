@@ -1,196 +1,91 @@
----
-
 # ZZU Thrift
 
-A student-to-student marketplace built specifically for Washington State University.
-Buy. Sell. Save. Repeat.
+A student-to-student marketplace built exclusively for Washington State University students. Buy. Sell. Save. Repeat.
 
-ZZU Thrift helps WSU students resell clothes, textbooks, tech, and dorm essentials in a safe, campus-focused environment — because paying full price is optional.
+ZZU Thrift helps WSU students resell clothes, textbooks, tech, and dorm essentials in a campus-focused marketplace, because paying full price is optional.
 
----
-# 🛞 Hackathon Theme: Reinventing the Wheel
+**Status:** Hackathon prototype built in 24 hours. Core features work, but the project is not production-ready.
 
-The theme of this hackathon was “Reinventing the Wheel.”
-Instead of trying to build something completely unheard of, we asked:
+## Team & My Role
 
-What if we reimagined something that already works — but made it better for a specific community?
+Built by a team of 4 at the 24-hour **CrimsonCode Hackathon** (February 2026): [@chanceshungu](https://github.com/chanceshungu), [@mohassan9989](https://github.com/mohassan9989), [@funkycoder123](https://github.com/funkycoder123), and me.
 
-We chose to reinvent Depop.
+I built the backend: the Express REST API and MongoDB data layer, passwordless Magic Link authentication with JWT sessions restricted to @wsu.edu emails, and the Docker Compose setup that gave the whole team an identical development environment. We presented the working app to the hackathon judges.
 
-Depop is a powerful resale platform, but it serves a global audience. That means:
+This repo is a mirror of our team's original private repository, with full commit history.
 
-- No built-in campus verification
+## Hackathon Theme: Reinventing the Wheel
 
-- No focus on student affordability
+Instead of building something unheard of, we asked: what if we took something that already works and made it better for one specific community?
 
-- No community-based trust layer
+We reinvented Depop. It's a strong resale platform, but it serves a global audience, with no campus verification, no focus on student budgets, and no community trust layer. ZZU Thrift keeps the resale idea and rebuilds it for WSU: student-only access, college-friendly pricing, local meetups, and WSU-inspired branding.
 
-So we rebuilt the idea — but specifically for WSU students.
-
- What We Reinvented
-
-Instead of creating another general marketplace, we:
-
- Made it student-exclusive
-
- Focused on college affordability
-
- Built it around campus culture
-
- Designed it for local meetups & trust
-
- Styled it with WSU-inspired branding
-
-We didn’t reinvent the concept of reselling.
-We reinvented who it’s for.
-
-Depop connects strangers.
-ZZU Thrift connects classmates.
-
----
-
-## Overview
-
-ZZU Thrift is a Depop-style marketplace web application designed exclusively for WSU students. It provides:
-
-* Secure student-only access
-* Clean product listings
-* Search and filtering
-* User profiles
-* Favorites system
-* Messaging between buyers and sellers
-* WSU-themed design and branding
-
-Built to make campus reselling simple, fast, and affordable.
-
----
-
-## Why This Project?
-
-College students:
-
-* Have limited budgets
-* Move frequently
-* Need flexible ways to buy/sell items
-
-
----
-
-## Tech Stack
-
-**Frontend**
-
-* React
-* Zustand (state management)
-* Tailwind CSS
-
-**Backend (if applicable)**
-
-* Node.js / Express (or your backend stack)
-* REST API architecture
-
-**Database**
-
-* (MongoDB / PostgreSQL / Firebase — update based on what you’re using)
-
----
+Depop connects strangers. ZZU Thrift connects classmates.
 
 ## Features
 
-### Authentication (Simulated / JWT-Based)
+**Authentication**
+- Passwordless Magic Link sign-in, restricted to @wsu.edu email addresses
+- JWT-based sessions and protected routes
 
-* Student login system
-* User session handling
-* Protected routes
+**Listings**
+- Create, edit, and delete listings with images, title, price, description, and category
+- Item detail pages
 
-### Product Listings
+**Search & Filtering**
+- Keyword search, category filters, and price sorting
 
-* Upload item images
-* Add title, price, description, category
-* View item details page
+**Messaging**
+- Direct buyer-to-seller conversations with an inbox
 
-### Search & Filtering
+**Favorites & Profiles**
+- Save items and view them from your profile
+- Manage your active listings and edit profile info
 
-* Search by keyword
-* Filter by category
-* Sort by price
+## Tech Stack
 
-### Messaging System
-
-* Buyer ↔ Seller direct messaging
-* Conversation threads
-
-### Favorites
-
-* Save items
-* View saved listings in profile
-
-### User Profiles
-
-* View posted listings
-* Manage active items
-* Edit profile info
-
----
+- **Frontend:** React, Zustand (state management), Tailwind CSS
+- **Backend:** Node.js, Express, REST API, JWT
+- **Database:** MongoDB
+- **Dev Environment:** Docker Compose
 
 ## Project Structure
 
 ```
-ZZU-Thrift/
-│
-├── src/
-│   ├── components/
-│   ├── pages/
-│   ├── store/
-│   ├── hooks/
-│   ├── services/
-│   └── assets/
-│
-├── public/
-├── package.json
+ZZUthrift/
+├── backend/             # Express REST API, auth, MongoDB models
+├── frontend/            # React + Zustand + Tailwind client
+├── docker-compose.yml   # Runs frontend, backend, and database together
 └── README.md
 ```
 
----
-
 ## Installation & Setup
 
+**Prerequisites:** Git and Docker Desktop
+
 1. Clone the repository:
-
 ```bash
-git clone https://github.com/yourusername/zzu-thrift.git
+git clone https://github.com/kwadafriyie/ZZUthrift.git
+cd ZZUthrift
 ```
 
-2. Navigate into the project directory:
+2. Create `backend/.env` with:
+```
+JWT_SECRET=your-own-long-random-string
+OPENAI_API_KEY=your-key-here   # optional
+```
+`MONGO_URI` defaults to the Docker database, so you only need to set it to use a different MongoDB instance.
 
+3. Build and start everything:
 ```bash
-cd zzu-thrift
+docker compose up --build
 ```
 
-3. Install dependencies:
-
-```bash
-npm install
-```
-
-4. Start the development server:
-
-```bash
-npm run dev
-```
-
-App will run at:
-
-```
-http://localhost:5173
-```
-
----
+4. Open the app at `http://localhost:3000` (the API runs on `http://localhost:8000`)
 
 ## Future Improvements
 
-* Admin dashboard
-* Report / moderation system
-* Push notifications
-* Mobile app version
-* User rating system
+- Admin dashboard and moderation/reporting
+- User rating system
+- Push notifications
+- Mobile app version
